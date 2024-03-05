@@ -21,3 +21,8 @@ $ npm Dotenv -E
 ``` bash
 git init
 ``` bash
+
+
+``` bash
+$ npm install mongoose
+``` bash
