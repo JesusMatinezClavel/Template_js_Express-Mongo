@@ -1,0 +1,157 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Express-Mongo",
+    "dateExported": "2024-03-07T20:46:34.861Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "d27f74db-f486-4bcb-b5f3-f368417b07fd",
+            "name": "AUTH",
+            "containerId": "",
+            "created": "2024-03-07T19:29:59.825Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "2f65387a-ef7a-425a-b655-830f5a8d6b26",
+            "name": "BOOKS",
+            "containerId": "",
+            "created": "2024-03-07T19:30:11.097Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "eff81870-6874-4863-843b-ca7e0f1d432a",
+            "colId": "8016e57f-8df9-4826-9c64-3ef3b08751e8",
+            "containerId": "d27f74db-f486-4bcb-b5f3-f368417b07fd",
+            "name": "Login",
+            "url": "localhost:4000/api/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-07T19:29:00.203Z",
+            "modified": "2024-03-07T19:29:19.269Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"Xuss@email.com\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "66deb5f0-b656-4aec-84f8-5d5c74d5a2c4",
+            "colId": "8016e57f-8df9-4826-9c64-3ef3b08751e8",
+            "containerId": "d27f74db-f486-4bcb-b5f3-f368417b07fd",
+            "name": "Register",
+            "url": "localhost:4000/api/auth/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-07T19:29:27.527Z",
+            "modified": "2024-03-07T19:29:53.927Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"exampleUser\",\n  \"email\": \"example@email.com\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "389982fb-ec84-429a-9346-b7edef0c661b",
+            "colId": "8016e57f-8df9-4826-9c64-3ef3b08751e8",
+            "containerId": "2f65387a-ef7a-425a-b655-830f5a8d6b26",
+            "name": "Create Book",
+            "url": "localhost:4000/api/books/",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-07T19:30:16.931Z",
+            "modified": "2024-03-07T20:37:42.756Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"test 03\",\n  \"description\":\"test 04\",\n  \"author\": \"test 01\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "0ef96694-50a3-45c5-b246-c86b9d448b6f",
+            "colId": "8016e57f-8df9-4826-9c64-3ef3b08751e8",
+            "containerId": "2f65387a-ef7a-425a-b655-830f5a8d6b26",
+            "name": "Get All Books",
+            "url": "localhost:4000/api/books?title=test 01&author&description",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-07T19:48:08.355Z",
+            "modified": "2024-03-07T20:44:10.333Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "title",
+                    "value": "test 01",
+                    "isPath": false
+                },
+                {
+                    "name": "author",
+                    "value": "",
+                    "isPath": false
+                },
+                {
+                    "name": "description",
+                    "value": "",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "2c11c281-a402-412c-aa7c-0819dd611f9b",
+            "colId": "8016e57f-8df9-4826-9c64-3ef3b08751e8",
+            "containerId": "2f65387a-ef7a-425a-b655-830f5a8d6b26",
+            "name": "Update Book",
+            "url": "localhost:4000/api/books?title=Book 023",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2024-03-07T19:59:42.549Z",
+            "modified": "2024-03-07T20:22:20.828Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "title",
+                    "value": "Book 023",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"new title\",\n  \"description\": \"new description\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e7b18c0-d931-4ec2-ab6b-3b4bce8c5570",
+            "colId": "8016e57f-8df9-4826-9c64-3ef3b08751e8",
+            "containerId": "2f65387a-ef7a-425a-b655-830f5a8d6b26",
+            "name": "Delete Book",
+            "url": "localhost:4000/api/books?title=test 01",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-03-07T20:42:27.653Z",
+            "modified": "2024-03-07T20:43:16.305Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "title",
+                    "value": "test 01",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}
