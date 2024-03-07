@@ -50,32 +50,44 @@ export const createBook = async (req, res) => {
     }
 }
 
-export const getAllBooks = async (req, res) => {
+export const getBooks = async (req, res) => {
     try {
         let { title, author, description } = req.query
 
         if (title) {
-            author=null
-            description=null
-            const titleBooks = await Book.find(
+            author = null
+            description = null
+            let titleBooks = await Book.find(
                 {
                     title
                 }
             )
+            if (titleBooks.length === 0) {
+                return res.status(200).json({
+                    success: false,
+                    message: `There's no book with the title: ${title}`,
+                    result: titleBooks
+                })
+            }
             res.status(200).json({
                 success: true,
                 message: `All books called by title: ${title}`,
-                result: titleBooks
             })
         }
 
         if (author) {
-            description=null
-            const authorBooks = await Book.find(
+            description = null
+            let authorBooks = await Book.find(
                 {
                     author
                 }
             )
+            if (authorBooks.length === 0) {
+                return res.status(200).json({
+                    success: false,
+                    message: `There's no book with the author: ${author}`,
+                })
+            }
             res.status(200).json({
                 success: true,
                 message: `All books called by auhor: ${author}`,
@@ -84,11 +96,17 @@ export const getAllBooks = async (req, res) => {
         }
 
         if (description) {
-            const descriptionBooks = await Book.find(
+            let descriptionBooks = await Book.find(
                 {
                     description
                 }
             )
+            if (descriptionBooks.length === 0) {
+                return res.status(200).json({
+                    success: false,
+                    message: `There's no book with the description: ${description}`,
+                })
+            }
             res.status(200).json({
                 success: true,
                 message: `All books called by description: ${description}`,
@@ -103,7 +121,7 @@ export const getAllBooks = async (req, res) => {
                 result: books
             })
         }
-        
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -190,7 +208,7 @@ export const deleteBook = async (req, res) => {
             }
         )
 
-        if(!removeBook){
+        if (!removeBook) {
             return res.status(400).json({
                 success: false,
                 message: `Book doesn't exist!`,
