@@ -52,13 +52,58 @@ export const createBook = async (req, res) => {
 
 export const getAllBooks = async (req, res) => {
     try {
-        const books = await Book.find()
+        let { title, author, description } = req.query
 
-        res.status(200).json({
-            success: true,
-            message: `New book created!`,
-            Results: books
-        })
+        if (title) {
+            author=null
+            description=null
+            const titleBooks = await Book.find(
+                {
+                    title
+                }
+            )
+            res.status(200).json({
+                success: true,
+                message: `All books called by title: ${title}`,
+                result: titleBooks
+            })
+        }
+
+        if (author) {
+            description=null
+            const authorBooks = await Book.find(
+                {
+                    author
+                }
+            )
+            res.status(200).json({
+                success: true,
+                message: `All books called by auhor: ${author}`,
+                result: authorBooks
+            })
+        }
+
+        if (description) {
+            const descriptionBooks = await Book.find(
+                {
+                    description
+                }
+            )
+            res.status(200).json({
+                success: true,
+                message: `All books called by description: ${description}`,
+                result: descriptionBooks
+            })
+        }
+        if (!title && !author && !description) {
+            const books = await Book.find()
+            res.status(200).json({
+                success: true,
+                message: `All books called!`,
+                result: books
+            })
+        }
+        
     } catch (error) {
         res.status(500).json({
             success: false,
