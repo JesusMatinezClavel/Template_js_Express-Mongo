@@ -173,5 +173,47 @@ export const updateBook = async (req, res) => {
     }
 }
 
+export const deleteBook = async (req, res) => {
+    try {
+        const { title } = req.query
+
+        if (!title) {
+            return res.status(400).json({
+                success: false,
+                message: `Title invalid!`,
+            })
+        }
+
+        const removeBook = await Book.findOne(
+            {
+                title
+            }
+        )
+
+        if(!removeBook){
+            return res.status(400).json({
+                success: false,
+                message: `Book doesn't exist!`,
+            })
+        }
+
+        await Book.findOneAndDelete({
+            title
+        })
+
+
+        res.status(200).json({
+            success: true,
+            message: `Book ${removeBook.title} has been deleted`,
+            results: removeBook
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: `server not responsive`,
+            error: error.message
+        })
+    }
+}
 
 
