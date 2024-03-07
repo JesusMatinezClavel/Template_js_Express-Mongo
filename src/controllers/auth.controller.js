@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import 'dotenv/config'
 import User from "../models/User.js";
 import jwt  from "jsonwebtoken";
 
@@ -90,8 +91,6 @@ export const login = async (req, res) => {
             }
         )
 
-        console.log(user);
-
         if (!user) {
             return res.status(400).json({
                 success: false,
@@ -115,7 +114,7 @@ export const login = async (req, res) => {
             },
             process.env.JWT_SECRET,
             {
-                expiresIn: "2h"
+                expiresIn: "1234h"
             }
         )
 
@@ -130,7 +129,7 @@ export const login = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "User cant be logged",
-            error: error
+            error: error.message
         })
     }
 }
