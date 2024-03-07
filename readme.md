@@ -17,12 +17,28 @@ $ npm Dotenv -E
 {
     "type": "module"
 }
+```
 
 ``` bash
-git init
+$ git init
 ``` bash
-
 
 ``` bash
 $ npm install mongoose
 ``` bash
+
+``` bash
+$ npm install bcrypt
+``` bash
+
+``` text
+Creamos el modelo
+```
+
+``` text
+Creamos el controlador
+```
+
+``` text
+Creamos la ruta
+```
