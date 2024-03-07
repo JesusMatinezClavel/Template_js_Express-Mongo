@@ -42,3 +42,7 @@ Creamos el controlador
 ``` text
 Creamos la ruta
 ```
+
+```bash
+$ npm i jsonwebtoken
+```
