@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, SchemaType, model } from "mongoose";
 
 
 const UserSchema = new Schema(
@@ -20,6 +20,10 @@ const UserSchema = new Schema(
             type: String,
             enum: ["user", "admin", "super_admin"],
             default: "user"
+        },
+        favoriteBooks: {
+            type: Schema.Types.ObjectId,
+            ref: 'Book'
         }
     },
     {

@@ -1,4 +1,5 @@
 import Book from "../models/Books.js"
+import User from "../models/User.js"
 
 
 
@@ -234,4 +235,25 @@ export const deleteBook = async (req, res) => {
     }
 }
 
+export const deleteAllBooks = async (req, res) => {
+    try {
+        let deleteAll = req.query
+        console.log(deleteAll);
+        if (deleteAll) {
+            const allBooks = await Book.find()
+            await Book.deleteMany(allBooks)
+            res.status(200).json({
+                success: true,
+                message: `All books has been deleted`,
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: `server not responsive`,
+            error: error.message
+        })
+    }
+}
 
