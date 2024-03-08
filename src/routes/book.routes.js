@@ -4,11 +4,11 @@ import { auth } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post('/',createBook)
-router.get('/', auth, getBooks)
-router.put('/', updateBook)
-router.delete('/', deleteBook)
-router.delete('/', deleteAllBooks)
+router.post('/', auth, createBook) // SUPERADMIN
+router.get('/', getBooks)
+router.put('/', auth, updateBook) // SUPERADMIN 
+router.delete('/', auth, deleteBook) // SUPERADMIN
+router.delete('/', auth, deleteAllBooks) // SUPERADMIN
 
 export default router
 

@@ -32,13 +32,7 @@ export const auth = (req, res, next) => {
             roleName: isValid.roleName
         }
 
-
-        res.status(200).json(
-            {
-                success: true
-            }
-        )
-        next
+        next()
     } catch (error) {
         res.status(500).json({
             success: false,

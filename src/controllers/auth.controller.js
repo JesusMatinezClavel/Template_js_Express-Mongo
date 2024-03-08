@@ -1,14 +1,21 @@
 import bcrypt from "bcrypt";
 import 'dotenv/config'
 import User from "../models/User.js";
-import jwt  from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import { handleError } from "./utils/handleErrors.js";
+import { json } from "express";
 
 
-export const register = async (req, res) => {
+export const register = async ({ body }, res) => {
     try {
-        const email = req.body.email
-        const password = req.body.password
+        const { name, email, password } = body
 
+        if (!name || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: `name, email or password is invalid!`
+            })
+        }
 
         if (password.length < 6 || password.length > 10) {
             return res.status(400).json({
@@ -16,7 +23,6 @@ export const register = async (req, res) => {
                 message: "Password must contain between 6 and 10 characters"
             })
         }
-
 
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!validEmail.test(email)) {
@@ -27,14 +33,14 @@ export const register = async (req, res) => {
                 }
             )
         }
+
         const passwordEncrypted = bcrypt.hashSync(password, 5)
 
         const user = await User.findOne({
             email: email
         })
-        console.log(user);
 
-        if(user){
+        if (user) {
             return res.status(400).json({
                 success: false,
                 message: `email ${email} is already in use!`
@@ -43,8 +49,9 @@ export const register = async (req, res) => {
 
         const newUser = await User.create(
             {
-                email: email,
-                password: passwordEncrypted
+                name,
+                email,
+                passwordEncrypted
             }
         )
 
@@ -54,11 +61,7 @@ export const register = async (req, res) => {
             data: newUser
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "User cant be registered",
-            error: error
-        })
+        handleError(res, 500, error.message)
     }
 }
 
@@ -125,12 +128,7 @@ export const login = async (req, res) => {
         })
 
     } catch (error) {
-
-        res.status(500).json({
-            success: false,
-            message: "User cant be logged",
-            error: error.message
-        })
+        superCatch(res, 'LOGIN FAILED')
     }
 }
 

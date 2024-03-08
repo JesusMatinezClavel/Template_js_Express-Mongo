@@ -1,17 +1,13 @@
 import Book from "../models/Books.js"
-import User from "../models/User.js"
-
+import { handleError } from "./utils/handleErrors.js"
 
 
 export const createBook = async (req, res) => {
     try {
         const { title, description, author } = req.body
 
-        if (!title || !description) {
-            return res.status(200).json({
-                success: false,
-                message: `title or description invalid!`,
-            })
+        if (!title || !description || !author) {
+            throw new Error('title or description invalid!')
         }
 
         const book = await Book.findOne(
@@ -22,10 +18,7 @@ export const createBook = async (req, res) => {
         )
 
         if (book) {
-            return res.status(200).json({
-                success: false,
-                message: `Book already exists!`,
-            })
+            throw new Error(`Book ${title} already exists!`)
         }
 
         const newBook = await Book.create(
@@ -43,11 +36,13 @@ export const createBook = async (req, res) => {
             Results: newBook
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: `server not responsive`,
-            error: error.message
-        })
+        if (error.message === 'title or description invalid!') {
+            handleError(error.message, res, 400)
+        }
+        if (error.message === `Book ${title} already exists!`) {
+            handleError(error.message, res, 400)
+        }
+        handleError(error.message, res, 500)
     }
 }
 
@@ -184,11 +179,7 @@ export const updateBook = async (req, res) => {
             results: bookAfter
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: `server not responsive`,
-            error: error.message
-        })
+        handleCatch('hola')
     }
 }
 
